@@ -1,7 +1,8 @@
 import os
-from dotenv import load_dotenv
+import ee
+import json
 
-load_dotenv()
-
-# Example configuration variable
-EARTH_ENGINE_API_KEY = os.getenv("EARTH_ENGINE_API_KEY")
+# Load credentials from environment variable
+service_account_info = json.loads(os.environ.get('GOOGLE_APPLICATION_CREDENTIALS_JSON'))
+credentials = ee.ServiceAccountCredentials('', service_account_info)
+ee.Initialize(credentials)
